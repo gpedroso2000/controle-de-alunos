@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- TELA DE CARREGAMENTO -->
+    <div class="vw-100 vh-100 d-flex align-items-center justify-content-center position-absolute" style="background-color: rgba(0,0,0,0.08);" id="telaDeEspera">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;"></div>
+    </div>
+    <!-- NAVEGAÇÃO -->
+    <div class="">
+        <ul class="nav shadow-sm justify-content-between py-3 px-2">
+            <li class="nav-item">
+                <button type="button" data-bs-toggle="offcanvas" data-bs-target="#mycanvas" class="btn btn-outline-primary">
+                    Menu
+                </button>
+            </li>
+            <li class="nav-item">
+                <h3 class="d-inline">G&G</h3>
+                <span class="fs-5">Colégio</span>
+            </li>
+            <li class="nav-item">
+                <button id="sair" class="btn btn-outline-primary">
+                    Sair
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="d-flex justify-content-center mt-1">
+        <img class="" src=" ./img/G&G Colégio.png " alt=" ">
+    </div>
+
+
+    <!-- MENU OFFCANVAS -->
+    <div class="offcanvas offcanvas-start" id="mycanvas">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Alunos</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <hr>
+        <div class="offcanvas-body">
+            <div id="listaNomes" class="list-group">
+
+            </div>
+            <div class="d-grid mt-2">
+                <!-- BOTÃO PARA CHAMAR O MODAL DE CADASTRO -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastrar">Cadastrar</button>
+            </div>
+            <div class="d-grid mt-2">
+                <!-- BOTÃO PARA CHAMAR O MODAL DE CONSULTA -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#consultar">Consultar e Remover</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CADASTRO -->
+    <div class="modal fade" id="cadastrar">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastrar</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="validaCadastro" class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input id="nome" type="text" class="form-control" placeholder="Nome">
+                                    <label>Nome Completo</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-4">
+                                <div class="form-floating">
+                                    <input id="idade" type="number" class="form-control" placeholder="Idade">
+                                    <label>Idade</label>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="form-floating">
+                                    <input id="matricula" type="number" class="form-control" placeholder="Matricula">
+                                    <label>Matricula</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input id="celular" type="number" class="form-control" placeholder="Celular">
+                                    <label>Celular</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input id="email" type="email" class="form-control" placeholder="Email">
+                                    <label>Email</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input id="senha" type="password" class="form-control" placeholder="Senha">
+                                    <label>Senha</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid mt-3">
+                            <button id="btnCadastro" type="button" class="btn btn-primary">Cadastrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONSULTAR -->
+    <div class="modal fade" id="consultar">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Consultar</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input id="nomeConsultar" type="text" class="form-control" placeholder="Nome">
+                                    <label id="lb">Nome</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid mt-3">
+                            <button id="btnConsultar" type="button" class="btn btn-primary">Consultar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="campos" class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input id="retornaNome" type="text" class="form-control" placeholder="Nome" disabled>
+                                    <label>Nome</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-4">
+                                <div class="form-floating">
+                                    <input id="retornaIdade" type="text" class="form-control" placeholder="Idade" disabled>
+                                    <label>Idade</label>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="form-floating">
+                                    <input id="retornaMatricula" type="text" class="form-control" placeholder="Matricula" disabled>
+                                    <label>Matricula</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input id="retornaCelular" type="text" class="form-control" placeholder="Celular" disabled>
+                                    <label>Celular</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input id="retornaEmail" type="text" class="form-control" placeholder="Email" disabled>
+                                    <label>Email</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input id="retornaSenha" type="text" class="form-control" placeholder="Senha" disabled>
+                                    <label>Senha</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid mt-3">
+                            <!-- <input type="submit" id="btnRemover" value="Remover" class="btn btn-primary"> -->
+                            <button id="btnRemover" type="submit" class="btn btn-primary">Remover</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center" style="height: 10rem;">
+        <h2></h2>
+
+    </div>
+
+    <!-- TAREFAS -->
+    <div id="tarefa" class="shadow-sm fixed-bottom p-5" style="transform: translateY(150px);">
+        <div class="row d-flex">
+            <!-- CARD NOTAS -->
+            <div class="col">
+                <div class="card">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#notas">
+                        <card class="card-body">
+                            <div class="card-image-top"></div>
+                            <h5 class="card-title text-center">Notas</h5>
+                            <div class="bg-white m-auto" style="width: 4rem; height: 0.2rem;"></div>
+                    </button>
+                    </card>
+                </div>
+            </div>
+            <!-- CARD FALTAS -->
+            <div class="col">
+                <div class="card">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#faltas">
+                        <card class="card-body">
+                            <div class="card-image-top"></div>
+                            <h5 class="card-title text-center">Faltas</h5>
+                            <div class="bg-white m-auto" style="width: 4rem; height: 0.2rem;"></div>
+                    </button>
+                    </card>
+                </div>
+            </div>
+            <!-- CARD OCORRÊNCIAS -->
+            <div class="col">
+                <div class="card">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ocorrencias">
+                        <card class="card-body">
+                            <div class="card-image-top"></div>
+                            <h5 class="card-title text-center">Ocorrências</h5>
+                            <div class="bg-white m-auto" style="width: 4rem; height: 0.2rem;"></div>
+                    </button>
+                    </card>
+                </div>
+            </div>
+            <!-- CARD ATIVIDADES -->
+            <div class="col">
+                <div class="card">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#atividades">
+                        <card class="card-body">
+                            <div class="card-image-top"></div>
+                            <h5 class="card-title text-center">Atividades</h5>
+                            <div class="bg-white m-auto" style="width: 4rem; height: 0.2rem;"></div>
+                    </button>
+                    </card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- MODAL NOTAS -->
+    <div class="modal fade modal-dialog-scrollable" id="notas">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="nodal-title">Notas</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <select id="notasMateria" class="form-select">
+                                    <option value=""></option>
+                                    <option value="matematica">Matematica</option>
+                                    <option value="geografia">Geografia</option>
+                                    <option value="portugues">Português</option>
+                                    <option value="ciencia">Ciência</option>
+                                    <option value="historia">História</option>
+                                </select>
+                                <label>Selecione a Disciplina</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <select id="notasBimestre" class="form-select">
+                                    <option value=""></option>
+                                    <option value="bimestre1">1º Bimestre</option>
+                                    <option value="bimestre2">2º Bimestre</option>
+                                    <option value="bimestre3">3º Bimestre</option>
+                                    <option value="bimestre4">4º Bimestre</option>
+                                </select>
+                                <label>Selecione o Bimestre</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input id="recebeNota" type="text" class="form-control" placeholder="notas">
+                                <label>Notas</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="d-grid" style="height: 100%;">
+                                <button id="btnInserirNotas" type="button" class="btn btn-dark">Inserir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TABELA DE NOTAS -->
+                    <table class="table text-center mt-2 table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Disciplina</th>
+                                <th>1º Bimestre</th>
+                                <th>2º Bimestre</th>
+                                <th>3º Bimestre</th>
+                                <th>4º Bimestre</th>
+                                <th>Média</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="materiaMatematica">
+                                <th>
+                                    Matematica
+                                </th>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr id="materiaGeografia">
+                                <th>
+                                    Geografia
+                                </th>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr id="materiaPortugues">
+                                <th>
+                                    Português
+                                </th>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr id="materiaCiencia">
+                                <th>
+                                    Ciência
+                                </th>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr id="materiaHistoria">
+                                <th>
+                                    História
+                                </th>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FALTAS -->
+    <div class="modal fade modal-dialog-scrollable" id="faltas">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="nodal-title">Faltas</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <select id="faltasMateria" class="form-select">
+                                    <option></option>
+                                    <option value="matematica">Matematica</option>
+                                    <option value="geografia">Geografia</option>
+                                    <option value="portugues">Português</option>
+                                    <option value="ciencia">Ciência</option>
+                                    <option value="historia">História</option>
+                                </select>
+                                <label>Selecione a Disciplina</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <select id="faltasBimestre" class="form-select">
+                                    <option></option>
+                                    <option value="bimestre1">1º Bimestre</option>
+                                    <option value="bimestre2">2º Bimestre</option>
+                                    <option value="bimestre3">3º Bimestre</option>
+                                    <option value="bimestre4">4º Bimestre</option>
+                                </select>
+                                <label>Selecione o Bimestre</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input id="recebeFalta" type="text" class="form-control" placeholder="faltas">
+                                <label>Faltas</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="d-grid" style="height: 100%;">
+                                <button id="btnInserirFaltas" type="button" class="btn btn-dark">Inserir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TABELA DE FALTAS -->
+                    <table class="table text-center mt-2">
+                        <thead>
+                            <tr>
+                                <th>Disciplina</th>
+                                <th>1º Bimestre</th>
+                                <th>2º Bimestre</th>
+                                <th>3º Bimestre</th>
+                                <th>4º Bimestre</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="faltaMatematica">
+                                <th>
+                                    Matematica
+                                </th>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr id="faltaGeografia">
+                                <th>
+                                    Geografia
+                                </th>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr id="faltaPortugues">
+                                <th>
+                                    Português
+                                </th>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr id="faltaCiencia">
+                                <th>
+                                    Ciência
+                                </th>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr id="faltaHistoria">
+                                <th>
+                                    História
+                                </th>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL OCORRÊNCIAS -->
+    <div class="modal fade" id="ocorrencias">
+        <div class="modal-dialog modal-dialog-scrollable  modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="nodal-title">Ocorrências</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <select id="tipo" class="form-select">
+                                    <option></option>
+                                    <option vlaue="suspensao">Suspensão</option>
+                                    <option value="advertencia">Advertência</option>
+                                </select>
+                                <label>Tipo</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <input id="data" type="date" class="form-control">
+                                <label>Data</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea id="motivo" class="form-control" cols="" rows=""></textarea>
+                                <label>Motivo</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <div class="d-grid">
+                                <button id="btnInserirOcorrencia" type="button" class="btn btn-dark">Inserir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5" id="divOcorrencia">
+                        <div class="row">
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <p class="fw-bold">Motivo</p>
+                            </div>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <p class="fw-bold">Data</p>
+                            </div>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <p class="fw-bold">Consequência</p>
+                            </div>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <p class="fw-bold">Assinatura Responsavel</p>
+                            </div>
+                            <hr>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ATIVIDADES -->
+    <div class="modal fade" id="atividades">
+        <div class="modal-dialog modal-dialog-scrollable  modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="nodal-title">Atividades</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" id="nomeAtividade" placeholder="atividades">
+                                <label>Nome da Atividade</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="materiaAtividade">
+                                    <option></option>
+                                    <option value="matematica">Matematica</option>
+                                    <option value="geografia">Geografia</option>
+                                    <option value="portugues">Português</option>
+                                    <option value="ciencia">Ciência</option>
+                                    <option value="historia">História</option>
+                                </select>
+                                <label>Disciplina</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="formFile" class="form-label"></label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <div class="d-grid" style="height: 100%;">
+                                <button type="button" class="btn btn-dark" id="btnInserirAtividade">Inserir</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-5" id="divAtividades">
+                        <div class="row">
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <p class="fw-bold">Atividade</p>
+                            </div>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <p class="fw-bold">Matéria</p>
+                            </div>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <p class="fw-bold">Professor</p>
+                            </div>
+                            <div class="col-3 d-flex align-items-center justify-content-center">
+                                <p class="fw-bold">Arquivo</p>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase.js"></script>
+    <script src="./scripts/professor.js"></script>
+    <script src="./scripts/cadastroAluno.js"></script>
+    <script src="./scripts/notas.js"></script>
+    <script src="./scripts/faltas.js"></script>
+    <script src="./scripts/ocorrencias.js"></script>
+    <script src="./scripts/atividades.js"></script>
+
+</body>
+
+</html>
