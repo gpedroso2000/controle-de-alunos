@@ -1,4 +1,4 @@
-# controle-de-aluno
+# CONTROLE DE ALUNO
 
 .Projeto para o TCC, do curso de Ciência da Computação.
 
